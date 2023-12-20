@@ -1,0 +1,193 @@
+
+punch:
+  Skills:
+  - CancelEvent
+  - skill{s=mele;cd=3}
+mele:
+  Conditions:
+  - offgcd
+  - targetwithin 10
+  Skills:
+  - gcd{ticks=20}
+  - potion{type=SLOW;duration=40;level=10;p=false;force=true} @Self
+  - look{headOnly=false;immediately=false;repeat=15;repeatInterval=1} @Target
+  - state{state=punch;li=2;lo=4;n=false;speed=1.4} @self
+  - delay 20
+  - skill{s=throw;cd=0} ~onHit
+throw:
+  Conditions:
+  - targetwithin{d=4}
+  Skills:
+  - sound{s=block.stone.break;p=0.5;v=1} @Self
+  - sound{s=block.stone.break;p=0.5;v=1} @Self
+  - sound{s=block.stone.break;p=0.5;v=1} @Self
+  - sound{s=block.stone.break;p=0.5;v=1} @Self
+  - sound{s=block.stone.break;p=0.5;v=1} @Self
+  - damage{amount=30;m=5;delay=1} @EntitiesInCone{r=5}
+  - sound{s=block.stone.fall;p=0.5;v=1} @Self
+  - sound{s=block.stone.fall;p=0.5;v=1} @Self
+  - sound{s=block.stone.fall;p=0.5;v=1} @Self
+  - sound{s=block.stone.break;p=0.5;v=1} @Self
+  - sound{s=block.stone.break;p=0.5;v=1} @Self
+  - sound{s=block.stone.break;p=0.5;v=1} @Self
+  - sound{s=block.stone.break;p=0.5;v=1} @Self
+  - sound{s=block.stone.break;p=0.5;v=1} @Self
+  - sound{s=block.stone.break;p=0.5;v=1} @Self
+  - sound{s=block.stone.break;p=0.5;v=1} @Self
+  - sound{s=block.stone.break;p=0.5;v=1} @Self
+  - throw{velocity=5;velocityY=3} @target
+rage:
+  Skills:
+  - CancelEvent
+  - skill{s=roar;cd=15}
+roar:
+  Conditions:
+  - offgcd
+  - targetwithin 10
+  Skills:
+  - gcd{ticks=20}
+  - potion{type=SLOW;duration=15;level=6;p=false;force=true} @Self
+  - look{headOnly=false;immediately=false;repeat=5;repeatInterval=1} @Target
+  - sound{s=entity.ravager.roar;p=0.5;v=1} @Self
+  - state{state=rage;li=2;lo=4;n=false;speed=1.4} @self
+  - effect:particlering{particle=cloud;a=3;y=0.2;r=2;points=32;s=0.1;hs=0;v=0.1} @self
+  - delay 15
+  - skill{s=scare;cd=0} ~onHit
+  - effect:particlering{particle=cloud;a=3;y=0.2;r=3.5;points=32;s=0.1;hs=0;v=0.1} @self
+scare:
+  Conditions:
+  - targetwithin{d=8}
+  Skills:
+  - effect:particlering{particle=cloud;a=3;y=0.2;r=5;points=32;s=0.1;hs=0;v=0.1} @self
+  - throw{velocity=15;velocityY=8} @target
+  - delay 50
+death:
+  Skills:
+  - sound{s=block.amethyst_block.hit;p=0.5;v=1} @Self
+  - sound{s=block.amethyst_block.fall;p=0.5;v=1} @Self
+  - sound{s=block.amethyst_block.break;p=0.5;v=1} @Self
+  - sound{s=entity.ravager.death;p=0.5;v=1} @Self
+  - sound{s=block.amethyst_block.place;p=0.5;v=1} @Self
+  - sound{s=block.amethyst_block.step;p=0.5;v=1} @Self
+  - effect:particles{particle=cloud;amount=10;hS=.25;vS=.25;speed=.01} @ModelPart{m=rocky;p=rightarm;offset=GLOBAL;y=-1.0}
+  - effect:particles{particle=cloud;amount=10;hS=.25;vS=.25;speed=.01} @ModelPart{m=rocky;p=righthand;offset=GLOBAL;y=-1.0}
+  - effect:particles{particle=cloud;amount=10;hS=.25;vS=.25;speed=.01} @ModelPart{m=rocky;p=leftarm;offset=GLOBAL;y=-1.0}
+  - effect:particles{particle=cloud;amount=10;hS=.25;vS=.25;speed=.01} @ModelPart{m=rocky;p=lefthand;offset=GLOBAL;y=-1.0}
+  - effect:particles{particle=cloud;amount=40;hS=1;vS=1;speed=.01} @Forward{f=0.0;y=1}
+  - effect:particles{particle=cloud;amount=10;hS=.25;vS=.25;speed=.01} @ModelPart{m=rocky;p=leftleg;offset=GLOBAL;y=-1.0}
+  - effect:particles{particle=cloud;amount=10;hS=.
+Beam:
+  Skills:
+  - skill:beam-Tick @forward{length=30;y=0}
+beam-Tick:
+  Skills:
+  - effect:particleline{particle=reddust;amount=1;fo=true}
+  - damage{a=100} @EntitiesInLine{r=1.5;fo=true}
+blockwav:
+  Skills:
+  - sound{s=entity.ravager.roar} @self
+  - potion{type=SLOW;d=30;lvl255;p=false} @self
+  - delay 45
+  - jump{velocity=1} @self
+  - delay 45
+  - blockwave{duration=200;material=ice;radius=5;radiusY=5;velocity=10;shape=sphere} @origin
+  - damage{amount=100} @EntitiesInRadius{r=5}
+CrushingLeap:
+  Cooldown: 10
+  Skills:
+  - sound{s=entity.pillager.celebrate} @self
+  - delay 50
+  - jump{velocity=1} @target
+  - delay 20
+  - leap{velocity=200} @target
+  - effect:explosion @self
+  - damage{amount=20} @EntitiesInRadius{r=5}
+Homer:
+  Skills:
+  - missile{ot=Homer_TICK;oh=Homer_HIT;v=4;i=1;hR=1;vR=1;in=0.75}
+
+Homer_TICK:
+  Skills:
+  - effect:particles{p=flame;a=1} @origin
+
+Homer_HIT:
+  Skills:
+  - effect:particles{p=lava;a=50;hS=1;vS=1}
+  - effect:sound{s=entity.generic.explode;v=1;p=0}
+  - prison{material=IRON_BLOCK;duration=200;breakable=true}
+  - damage{a=10;i=false}
+RiseAndSpin:
+  Skills:
+  - sound{s=block.beacon.activate} @self
+  - potion{type=SLOW;duration=200;level=255} @self
+  - delay 50
+  - effect:spin{duration=50;velocity=15} @self
+  - potion{type=SLOW;d=380;lvl65;p=false} @self
+  - skill{s=IceBolt} @Forward{f=5;y=0.0;sideOffset=0.0}
+  - delay 1
+  - skill{s=IceBolt} @Forward{f=5;y=0.0;sideOffset=0.0}
+  - delay 1
+  - skill{s=IceBolt} @Forward{f=5;y=0.0;sideOffset=0.0}
+  - delay 1
+  - skill{s=IceBolt} @Forward{f=5;y=0.0;sideOffset=0.0}
+  - delay 1
+  - skill{s=IceBolt} @Forward{f=5;y=0.0;sideOffset=0.0}
+  - delay 1
+  - skill{s=IceBolt} @Forward{f=5;y=0.0;sideOffset=0.0}
+  - delay 1
+  - skill{s=IceBolt} @Forward{f=5;y=0.0;sideOffset=0.0}
+  - delay 1
+  - skill{s=IceBolt} @Forward{f=5;y=0.0;sideOffset=0.0}
+  - delay 1
+  - skill{s=IceBolt} @Forward{f=5;y=0.0;sideOffset=0.0}
+  - delay 1
+  - skill{s=IceBolt} @Forward{f=5;y=0.0;sideOffset=0.0}
+  - delay 1
+  - skill{s=IceBolt} @Forward{f=5;y=0.0;sideOffset=0.0}
+  - delay 1
+  - skill{s=IceBolt} @Forward{f=5;y=0.0;sideOffset=0.0}
+  - delay 1
+  - skill{s=IceBolt} @Forward{f=5;y=0.0;sideOffset=0.0}
+  - delay 1
+  - skill{s=IceBolt} @Forward{f=5;y=0.0;sideOffset=0.0}
+  - delay 1
+  - skill{s=IceBolt} @Forward{f=5;y=0.0;sideOffset=0.0}
+  - delay 1
+  - skill{s=IceBolt} @Forward{f=5;y=0.0;sideOffset=0.0}
+  - delay 1
+  - skill{s=IceBolt} @Forward{f=5;y=0.0;sideOffset=0.0}
+  - delay 1
+  - skill{s=IceBolt} @Forward{f=5;y=0.0;sideOffset=0.0}
+  - delay 1
+  - skill{s=IceBolt} @Forward{f=5;y=0.0;sideOffset=0.0}
+  - delay 1
+  - skill{s=IceBolt} @Forward{f=5;y=0.0;sideOffset=0.0}
+  - delay 1
+  - skill{s=IceBolt} @Forward{f=5;y=0.0;sideOffset=0.0}
+  - delay 1
+  - skill{s=IceBolt} @Forward{f=5;y=0.0;sideOffset=0.0}
+  - delay 1
+  - skill{s=IceBolt} @Forward{f=5;y=0.0;sideOffset=0.0}
+  - delay 1
+  - skill{s=IceBolt} @Forward{f=5;y=0.0;sideOffset=0.0}
+  - delay 50
+IceBolt:
+  Skills:
+  - projectile{onTick=IceBolt-Tick;onHit=IceBolt-Hit;v=4;i=1;hR=1;vR=1;hs=true}
+IceBolt-Tick:
+  Skills:
+  - effect:particlesphere{p=reddust;color=#46a6dd;amount=100;radius=1;speed=0;hS=0.2;vS=0.2} @origin
+IceBolt-Hit:
+  Skills:
+  - damage{a=30}
+Skills:
+  - generator{t=2s;interval=2s;d=15} @Self{loc=(13, 174, -14);block=CRYING_OBSIDIAN}
+
+
+
+
+  
+
+
+
+

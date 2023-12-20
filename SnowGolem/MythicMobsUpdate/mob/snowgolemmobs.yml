@@ -1,0 +1,36 @@
+GOLEMKING:
+  Type: IRON_GOLEM
+  Display: 'SnowGolemKing'
+  Health: 10000
+  Damage: 0
+  AIGoalsSelectors:
+  - 0 clear
+  - 1 meleeattack
+  - 2 randomstroll
+  AiTargetSelectors:
+  - 0 clear
+  - 1 players
+  - 2 hurtbytarget
+  DamageModifiers:
+  - PROJECTILE 0
+  Skills:
+  - model{mid=snowgolem;n=false} @self ~onSpawn
+  - randomskill{skills=punch,rage,Beam,blockwav,CrushingLeap,Homer,RiseAndSpin,HealingBeam;sync=true} ~onAttack
+  - sound{s=block.amethyst_block.hit;p=0.5;v=1} @self ~onDamaged
+  - barCreate{name="SnowGolemKing";display="&c&l---&r&bGOLEM_KING&r&c&l---";v=1;color=Red;style=Solid} @Self ~onSpawn
+  - actionbar{m="&c&lDamage Taken: <mob.damagedealt>"} @Self ~onDamaged
+  - particleline{particle=reddust;amount=5;duration=40} @Self{loc=(13, 174, -14)}
+  - damage{a=15} @Self
+  - delay 40
+  - skill{stype=HealingBeam;cd=40} @Self
+  Options:
+    AlwaysShowName: false
+    Collidable: true
+    Silent: true
+    MovementSpeed: 0.20
+    MaxCombatDistance: 5
+    PreventOtherDrops: true
+    KnockbackResistance: 2
+   
+      
+           
