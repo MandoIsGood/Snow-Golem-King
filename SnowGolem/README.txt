@@ -7,5 +7,3 @@
 06. Go to MythicMobs plugin folder, go to "mobs" file, paste the snowgolemmobs.yml into the mob file of the plugin
     do the same with "skills" file, paste snowgolemskills.yml into the skill folder
 07. Test the mob if its working if its not get in touch with me ASAP!
-08. Uh wheres my promotion party after this project? 😉 
-   
